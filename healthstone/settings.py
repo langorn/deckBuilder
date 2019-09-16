@@ -26,7 +26,7 @@ SECRET_KEY = 'ga6nfzy4=z2gmxg@yy4@50bipb4@(f6h!j!me)ngcqn9b&-kbq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [healthstone.herokuapp.com']
+ALLOWED_HOSTS = ['healthstone.herokuapp.com']
 
 
 # Application definition
