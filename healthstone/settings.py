@@ -25,7 +25,7 @@ SECRET_KEY = 'ga6nfzy4=z2gmxg@yy4@50bipb4@(f6h!j!me)ngcqn9b&-kbq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['healthstone.herokuapp.com']
+ALLOWED_HOSTS = ['healthstone.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'healthstone.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR+'/cardpicker/template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

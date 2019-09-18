@@ -1,0 +1,92 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+<h1>HEALTHSTONE</h1>
+<style>
+body{
+  background-color:#CECECE;
+}
+a {
+  color:white;
+}
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+.menu {
+    display:inline-block;
+    margin:2px;
+}
+.cardWitdh {
+    width:15em;
+    display:inline-block;
+}
+.card-body{
+  height:120px;
+  padding:20px;
+}
+</style>
+
+<body>
+  <div id="mydiv"></div>
+</body>
+
+
+  <script type="text/babel">
+    class Hello extends React.Component {
+      constructor(props) {
+          super(props);
+          this.state = {
+              cards:[]
+          }
+          this.buildDeck = this.buildDeck.bind(this);
+      }
+      buildDeck() {
+          fetch('/cardpicker/draw/', {method: 'get'})
+          .then(function(response) {
+              return response.json()
+          }).then(data=>{
+              data = data.sort((a,b)=> a.dbfId - b.dbfId)
+              this.setState({cards: data})
+              console.log(data);
+          })
+      }
+      render() {
+        return <div>
+          <div>
+            <div className="menu"><button onClick={this.buildDeck} className="btn btn-primary">PICK YOUR CARD</button></div>
+            <div className="menu"><button className="btn btn-primary"><a target="_blank" href="/cardpicker/decks" >Output Json</a></button></div>
+          </div>
+          <div>
+         {this.state.cards.map( (card, index) => <div className="cardWitdh" key={card.id}  >
+           <div className="card">
+             <div className="card-body">
+              <div className="card-title">{index + 1}. {card.name} [{card.playerClass}]</div>
+              <p className="card-text">
+                <div><i> {card.dbfId}</i></div>
+              </p>
+             </div>
+           </div>
+         </div>
+        )}
+        </div>
+        </div>
+
+      }
+    }
+    ReactDOM.render(<Hello />, document.getElementById('mydiv'))
+
+  </script>
